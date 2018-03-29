@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <!--Import Google Icon Font-->
+        <link type="text/css" rel="stylesheet" href="css/material-icons.css"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
+
+        <!--Import style-custom.css-->
+        <link type="text/css" rel="stylesheet" href="css/style-custom.css"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <title>Contatos</title>
+    </h:head>
+    <h:body>
+
+        <div class="navbar-fixed">
+            <nav class="blue-grey">
+                <div class="nav-wrapper">
+                    <a href="index.xhtml" class="brand-logo"><img src="imagens/contato.png" width="22%" alt="logo"/></a>
+                    <ul class="right hide-on-med-and-down">
+                        <h:form>
+                            <li><a href="cadastro.xhtml"><i class="material-icons right">input</i>Cadastro de Contatos</a></li>
+                        </h:form>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <div class="col s12" align="center" style="margin: 4% 0% 0% 0%">
+                <h4>Digite o nome para pesquisar um contato</h4>
+            </div>
+
+            <h:form>
+                <div class="row">
+                    <div class="input-field col s5 offset-l3">
+                        <i class="material-icons prefix">person</i>
+                        <h:inputText id="busca" value="#{controladorDeContato.contato.nome}" class="validate"/>
+                    </div>
+                    <div class="col s3">
+                        <button class="btn-floating" jsf:action="#{controladorDeContato.buscarPorNome()}" style="margin-top: 6%"><i class="material-icons prefix">search</i></button>
+                    </div>
+                </div>
+            </h:form>
+
+            <div class="row">
+                <div class="col s12 m6 offset-l3" jsf:rendered="#{controladorDeContato.resultadoDaBusca != false}">
+                    <div class="card blue-grey">
+                        <div class="card-content white-text">
+                            <h:dataTable value="#{controladorDeContato.buscarContatosPorNome()}" var="contatos" style="margin-bottom: 5%">
+                                <h:column>
+                                    <f:facet name="header">Nome</f:facet>
+                                    <h:outputText value="#{contatos.nome}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Telefone</f:facet>
+                                    <h:outputText value="#{contatos.telefone}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">E-mail</f:facet>
+                                    <h:outputText value="#{contatos.email}" />
+                                </h:column>
+                            </h:dataTable>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col s12" align="center" style="margin-top: 5%">
+                <h5>Contatos</h5>
+            </div>
+
+            <h:dataTable value="#{controladorDeContato.todosOsContatos()}" var="contato" style="margin-bottom: 5%">
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{contato.nome}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Telefone</f:facet>
+                    <h:outputText value="#{contato.telefone}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:outputText value="#{contato.email}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <h:form>
+                        <h:commandLink class="btn-floating waves-effect waves-light btn" action="#{controladorDeContato.editar(contato)}">  
+                            <i class="material-icons right">edit</i>
+                        </h:commandLink>
+                    </h:form>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:form>
+                        <h:commandLink class="btn-floating btn-flat waves-effect waves-light red" action="#{controladorDeContato.excluir(contato)}">  
+                            <i class="material-icons right">delete_forever</i>
+                        </h:commandLink>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</html>
+

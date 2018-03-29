@@ -1,0 +1,4 @@
+com/ifpb/docker/jsf/controladores/controladorDeContato.class
+com/ifpb/docker/jsf/modelo/Contato.class
+com/ifpb/docker/jsf/dao/ContatoDao.class
+com/ifpb/docker/jsf/servico/DaoContato.class
